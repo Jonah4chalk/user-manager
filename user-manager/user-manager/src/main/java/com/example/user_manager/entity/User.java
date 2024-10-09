@@ -1,5 +1,7 @@
 package com.example.user_manager.entity;
 
+import com.sanctionco.jmail.JMail;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,7 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "financial_planner_db", schema = "users")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,12 +20,20 @@ public class User {
     private String email_address;
     private String phone_number;
 
-    public User(String username, String first_name, String last_name, String email_address, String phone_number) {
-        this.username = username;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.email_address = email_address;
-        this.phone_number = phone_number;
+    public User(){}
+
+    public User(String username, String first_name, String last_name, String email_address, String phone_number) throws IllegalArgumentException {
+        if (JMail.isInvalid(email_address)) {
+            throw new IllegalArgumentException("Invalid email address");
+        }
+        else {
+            this.username = username;
+            this.first_name = first_name;
+            this.last_name = last_name;
+            this.email_address = email_address;
+            this.phone_number = phone_number;
+        }
+        
     }
 
     // getters and setters
@@ -65,7 +75,12 @@ public class User {
     }
 
     public void setEmailAddress(String new_email) {
-        this.email_address = new_email;
+        if (JMail.isInvalid(new_email)) {
+            throw new IllegalArgumentException("Invalid email address");
+        }
+        else {
+            this.email_address = new_email;
+        }
     }
 
     public String getPhoneNumber() {
