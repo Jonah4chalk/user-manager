@@ -1,4 +1,4 @@
-package com.example.user_manager.entity;
+package com.example.user_manager;
 
 import com.sanctionco.jmail.JMail;
 
@@ -39,7 +39,7 @@ public class User {
     // getters and setters
 
     public Long getId() {
-        return user_id;
+        return this.user_id;
     }
 
     public void setId(Long new_id) {
@@ -47,7 +47,7 @@ public class User {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public void setUsername(String new_username) {
@@ -55,7 +55,7 @@ public class User {
     }
 
     public String getFirstName() {
-        return first_name;
+        return this.first_name;
     }
 
     public void setFirstName(String new_first_name) {
@@ -63,15 +63,25 @@ public class User {
     }
 
     public String getLastName() {
-        return last_name;
+        return this.last_name;
     }
 
     public void setLastName(String new_last_name) {
         this.last_name = new_last_name;
     }
 
+    public String getName() {
+        return this.first_name + " " + this.last_name;
+    }
+
+    public void setName(String new_name) {
+        String[] name = new_name.split(" ");
+        this.first_name = name[0];
+        this.last_name = name[1];
+    }
+
     public String getEmailAddress() {
-        return email_address;
+        return this.email_address;
     }
 
     public void setEmailAddress(String new_email) {
@@ -84,7 +94,7 @@ public class User {
     }
 
     public String getPhoneNumber() {
-        return phone_number;
+        return this.phone_number;
     }
 
     public void setPhoneNumber(String new_phone_number) {
